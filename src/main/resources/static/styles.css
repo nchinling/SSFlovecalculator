@@ -1,0 +1,26 @@
+
+.title {
+	display: flex;
+	align-items: center;
+}
+.title>h2 {
+	font-size: 2em;
+}
+
+.error{
+	font-family: monospace;
+	color:red;
+	font-weight: bold;
+}
+
+table, th, td {
+    border: 1px solid;
+  }
+
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top-color: rgb(220, 30, 100); 
+  }
+
