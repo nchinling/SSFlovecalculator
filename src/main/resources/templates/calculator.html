@@ -9,24 +9,28 @@
 </head>
 <body>
     <body data-th-object="${calculatorresults}">
-        <div class = "container">
+        <div class = "container" align="center">
 
         <h1> Your love score results is out.</h1>
             
         <table>
             <tr>
-                <td><p>Your name</p></td>
-                <td><p>Your lover (or you wish) name</p></td>
+                <td><h2>Id</h2></td>
+                <td><h2>Your name</h2></td>
+                <td></td>
+                <td><h2>Your lover's (or you wish) name</h2></td>
                 
-                <td><p>Percentage</p></td>
-                <td><p>Result</p></td>
+                <td><h2>Percentage</h2></td>
+                <td><h2>Result</h2></td>
             </tr>
 
             <tr>
-                <td><p data-th-text="*{fname}"></p></td>
-                <td><p data-th-text="*{sname}"></p></td>
-                <td><p data-th-text="*{percentage}"></p></td>
-                <td><p data-th-text="*{result}"></p></td>
+                <td><h2 data-th-text="*{dataId}"></h2></td>
+                <td><h2 data-th-text="*{fname}"></h2></td>
+                <td><img src ="/images/heart.png" width="40"></td>
+                <td><h2 data-th-text="*{sname}"></h2></td>
+                <td><h2 data-th-text="*{percentage}"></h2></td>
+                <td><h2 data-th-text="*{result}"></h2></td>
             </tr>
 
             

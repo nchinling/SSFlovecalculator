@@ -1,8 +1,10 @@
 package sg.edu.nus.iss.lovecalculator.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.RequestEntity;
@@ -12,9 +14,12 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import sg.edu.nus.iss.lovecalculator.model.Calculator;
+import sg.edu.nus.iss.lovecalculator.repo.CalculatorRepo;
 
 @Service
 public class CalculatorService {
+    @Autowired
+    private CalculatorRepo calculatorrepo;
     
     @Value("${workshop.love.calculator.url}")
     private String loveCalculatorUrl;
@@ -24,6 +29,27 @@ public class CalculatorService {
 
     @Value("${workshop.love.calculator.api.host}")
     private String loveCalculatorHost;
+
+    public void save(final Calculator calculator){
+        calculatorrepo.save(calculator);
+    }
+
+    // public List<Calculator> findAll(int startIndex){
+    //     return calculatorrepo.findAll(startIndex);
+    // }
+
+    public Optional<Calculator> findById(final String dataId) throws IOException{
+        return calculatorrepo.findById(dataId);
+    }  
+
+    // public Optional<Calculator> findById(final String dataId) throws IOException{
+    //     Calculator c = Calculator.createUserObject(dataId);
+        
+    //     //if not null, save to redisobject.
+    //     if(c == null)
+    //         return Optional.empty();
+    //     return Optional.of(c);
+    // }  
 
     public Optional<Calculator> getResult(String fname, String sname)
         throws IOException{
@@ -55,14 +81,13 @@ public class CalculatorService {
         RestTemplate template= new RestTemplate();
         ResponseEntity<String> r  = template.exchange(req, 
                 String.class);
-        Calculator c = Calculator.create(r.getBody());
+        Calculator c = Calculator.createUserObject(r.getBody());
         
         //if not null, save to redisobject.
         if(c == null)
             return Optional.empty();
         return Optional.of(c);
     }
-
 
 }
 

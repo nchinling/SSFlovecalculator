@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.UUID;
 
 import jakarta.json.Json;
 import jakarta.json.JsonNumber;
@@ -11,23 +12,36 @@ import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 
 public class Calculator implements Serializable {
-    
+    private static final long serialVersionUID = 1L;
+
     private String fname;
     private String sname;
     private String percentage;
     private String result;
 
-    //need to implement id
+    //need to implement id for redis db.
+    private String dataId;
 
-    public Calculator() {}
+    // public Calculator() {}
+
+    public Calculator() {
+        this.dataId = generateId(8);
+    }
 
     public Calculator(String fname, String sname) {
         this.fname = fname;
         this.sname = sname;
     }
 
-    
+    // public Calculator(String fname, String sname, String percentage, String result) {
+    //     this.fname = fname;
+    //     this.sname = sname;
+    //     this.percentage = percentage;
+    //     this.result = result;
+    // }
+
     public Calculator(String fname, String sname, String percentage, String result) {
+        this.dataId = generateId(8);
         this.fname = fname;
         this.sname = sname;
         this.percentage = percentage;
@@ -46,6 +60,10 @@ public class Calculator implements Serializable {
     public String getResult() {return result;}
     public void setResult(String result) {this.result = result;}
 
+    public String getDataId() {return dataId;}
+    public void setDataId(String dataId) {this.dataId = dataId;}
+    
+
     //convert from JsonObject to Java
     // public static Calculator createFromJson(JsonObject j){
     //     Calculator c = new Calculator();
@@ -61,21 +79,22 @@ public class Calculator implements Serializable {
     //     return c;
     // }
 
+    private synchronized String generateId(int size){
+        UUID uuid = UUID.randomUUID();
+        String uuidString = uuid.toString().substring(0, 8);
+        return uuidString;
+    }
+
+  
     // convert json to Java object. 
-    public static Calculator create(String json) throws IOException{
+    public static Calculator createUserObject(String json) throws IOException{
         Calculator c = new Calculator();
         try(InputStream is = new ByteArrayInputStream(json.getBytes())) {
             JsonReader r = Json.createReader(is);
             JsonObject o = r.readObject();
             c.setFname(o.getString("fname"));
-
-            // JsonObject sname = o.getJsonObject("sname");
             c.setSname(o.getString("sname"));
-
-            // JsonObject percentage = o.getJsonObject("percentage");
             c.setPercentage(o.getString("percentage"));
-
-            // JsonObject result = o.getJsonObject("result");
             c.setResult(o.getString("result"));
 
         }
@@ -83,9 +102,30 @@ public class Calculator implements Serializable {
         return c;
     }
 
+
+    // this.dataId = generateId(8);
+    // this.fname = fname;
+    // this.sname = sname;
+    // this.percentage = percentage;
+    // this.result = result;
+
+    public JsonObject toJSON(){
+        return Json.createObjectBuilder()
+                .add("dataId", this.getDataId())
+                .add("fname", this.getFname())
+                .add("sname", this.getSname())
+                .add("percentage", this.getPercentage())
+                .add("result", this.getResult())
+                .build();
+    }
+
+    @Override
+    public String toString() {
+        return "fname=" + this.getFname() + ", sname=" + this.getSname() + ", percentage=" + this.getPercentage() + ", result=" + this.getResult()
+                + ", dataId=" + this.getDataId() + "]";
+    }
+
     
 
-
-
-
+    
 }

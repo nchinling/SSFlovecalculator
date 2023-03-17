@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import sg.edu.nus.iss.lovecalculator.model.Calculator;
+import sg.edu.nus.iss.lovecalculator.repo.CalculatorRepo;
 import sg.edu.nus.iss.lovecalculator.service.CalculatorService;
 
 
@@ -25,8 +27,23 @@ public class AppController {
     @RequestParam(required=true) String sname, Model model) 
     throws IOException{
     Optional<Calculator> c = cSvc.getResult(fname, sname);
+    cSvc.save(c.get());
     model.addAttribute("calculatorresults", c.get());
     return "calculator";
     }
+
+
+    @GetMapping(path="{dataId}")
+    public String getDataId(Model model, @PathVariable String dataId) throws IOException{
+        
+        Optional<Calculator> c = cSvc.findById(dataId);
+        model.addAttribute("calculatorresults", c.get());
+        return "calculator";
+    }
+
+
+
+
+ 
 }
 
