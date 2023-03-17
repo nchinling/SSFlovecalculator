@@ -2,9 +2,12 @@ package sg.edu.nus.iss.lovecalculator.repo;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,21 +40,24 @@ public class CalculatorRepo {
         return Optional.of(Calculator.createUserObject(json));
     }
 
-    // public List<Calculator> findAll(int startIndex){
-    //     List<Object> fromContactList = template.opsForList()
-    //         .range(DATA_LIST, startIndex, 10);
 
-    //     List<Calculator> alldata = new ArrayList<>();
-    //     List<Object> objects = template.opsForHash().multiGet(DATA_LIST + "_Map", fromContactList);
-    //     for (Object object : objects) {
-    //         if (object instanceof Contact) {
-    //         ctcs.add((Contact) object);
-    //         }
-    //     }
+    public List<Calculator> findAll(int startIndex) throws IOException{
+        Set<String> allKeys = template.keys("*");
+        List<Calculator> calcarray = new LinkedList<>();
+        for (String key : allKeys) {
+            String result = template.opsForValue().get(key);
 
-    //     return ctcs;
+            calcarray.add(Calculator.createUserObject(result));
+        }
 
-    // }
+        return calcarray;
 
+    }
+
+    
+
+
+
+    
 
 }

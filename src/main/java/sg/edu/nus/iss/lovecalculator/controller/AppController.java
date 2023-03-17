@@ -1,6 +1,7 @@
 package sg.edu.nus.iss.lovecalculator.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +33,20 @@ public class AppController {
     return "calculator";
     }
 
-
     @GetMapping(path="{dataId}")
     public String getDataId(Model model, @PathVariable String dataId) throws IOException{
         
         Optional<Calculator> c = cSvc.findById(dataId);
         model.addAttribute("calculatorresults", c.get());
         return "calculator";
+    }
+
+
+    @GetMapping(path="/list")
+    public String getAll(Model model, @RequestParam(defaultValue = "0") Integer startIndex) throws IOException{
+        List<Calculator> c = cSvc.findAll(startIndex);
+        model.addAttribute("datalist", c);
+        return "alldata";
     }
 
 

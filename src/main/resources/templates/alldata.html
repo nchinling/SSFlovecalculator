@@ -11,12 +11,17 @@
     <h1> All contacts </h1>
 
     <table>
-        <tr data-th-each="c : ${contacts}">
+        <tr data-th-each="c : ${datalist}">
             <td>
-                <a data-th-href="@{'/form/' + ${c.id}}"
-                data-th-text="${c.id}" >
-
+                <a data-th-href="@{'/calculate/' + ${c.dataId}}"
+                data-th-text="${c.dataId}" >
             </td>
+            <td><h2 data-th-text="*{c.fname}"></h2></td>
+            <td><img src ="/images/heart.png" width="40"></td>
+            <td><h2 data-th-text="*{c.sname}"></h2></td>
+            <td><h2 data-th-text="*{c.percentage}"></h2></td>
+            <td><h2 data-th-text="*{c.result}"></h2></td>
+            
 
         </tr>
 

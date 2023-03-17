@@ -34,22 +34,14 @@ public class CalculatorService {
         calculatorrepo.save(calculator);
     }
 
-    // public List<Calculator> findAll(int startIndex){
-    //     return calculatorrepo.findAll(startIndex);
-    // }
-
+ 
     public Optional<Calculator> findById(final String dataId) throws IOException{
         return calculatorrepo.findById(dataId);
     }  
 
-    // public Optional<Calculator> findById(final String dataId) throws IOException{
-    //     Calculator c = Calculator.createUserObject(dataId);
-        
-    //     //if not null, save to redisobject.
-    //     if(c == null)
-    //         return Optional.empty();
-    //     return Optional.of(c);
-    // }  
+    public List<Calculator> findAll(int startIndex) throws IOException{
+        return calculatorrepo.findAll(startIndex);
+    }
 
     public Optional<Calculator> getResult(String fname, String sname)
         throws IOException{
