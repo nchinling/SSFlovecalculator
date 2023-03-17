@@ -37,7 +37,7 @@ public class CalculatorRepo {
             return Optional.empty();
         }
 
-        return Optional.of(Calculator.createUserObject(json));
+        return Optional.of(Calculator.createUserObjectFromRedis(json));
     }
 
 

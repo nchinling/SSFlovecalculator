@@ -28,5 +28,8 @@ table, th, td {
     background-image: url('/images/valentine.png');
   }
 
+  .bold {
+    font-weight: bold;
+  }
 
 

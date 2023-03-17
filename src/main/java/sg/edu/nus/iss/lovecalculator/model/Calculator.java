@@ -22,10 +22,11 @@ public class Calculator implements Serializable {
     //need to implement id for redis db.
     private String dataId;
 
-    // public Calculator() {}
-
     public Calculator() {
-        this.dataId = generateId(8);
+    }
+
+    public Calculator(String dataId) {
+        this.dataId = dataId;
     }
 
     public Calculator(String fname, String sname) {
@@ -33,15 +34,15 @@ public class Calculator implements Serializable {
         this.sname = sname;
     }
 
-    // public Calculator(String fname, String sname, String percentage, String result) {
-    //     this.fname = fname;
-    //     this.sname = sname;
-    //     this.percentage = percentage;
-    //     this.result = result;
-    // }
+    public Calculator(String dataId, String fname, String sname, String percentage, String result) {
+        this.dataId = dataId;
+        this.fname = fname;
+        this.sname = sname;
+        this.percentage = percentage;
+        this.result = result;
+    }
 
     public Calculator(String fname, String sname, String percentage, String result) {
-        // this.dataId = generateId(8);
         this.fname = fname;
         this.sname = sname;
         this.percentage = percentage;
@@ -79,7 +80,7 @@ public class Calculator implements Serializable {
     //     return c;
     // }
 
-    private synchronized String generateId(int size){
+    private synchronized static String generateId(int size){
         UUID uuid = UUID.randomUUID();
         String uuidString = uuid.toString().substring(0, 8);
         return uuidString;
@@ -98,7 +99,8 @@ public class Calculator implements Serializable {
             c.setResult(o.getString("result"));
 
         }
-
+        
+        c.setDataId(generateId(8));
         return c;
     }
 
