@@ -41,7 +41,7 @@ public class Calculator implements Serializable {
     // }
 
     public Calculator(String fname, String sname, String percentage, String result) {
-        this.dataId = generateId(8);
+        // this.dataId = generateId(8);
         this.fname = fname;
         this.sname = sname;
         this.percentage = percentage;
@@ -92,6 +92,22 @@ public class Calculator implements Serializable {
         try(InputStream is = new ByteArrayInputStream(json.getBytes())) {
             JsonReader r = Json.createReader(is);
             JsonObject o = r.readObject();
+            c.setFname(o.getString("fname"));
+            c.setSname(o.getString("sname"));
+            c.setPercentage(o.getString("percentage"));
+            c.setResult(o.getString("result"));
+
+        }
+
+        return c;
+    }
+
+    public static Calculator createUserObjectFromRedis(String json) throws IOException{
+        Calculator c = new Calculator();
+        try(InputStream is = new ByteArrayInputStream(json.getBytes())) {
+            JsonReader r = Json.createReader(is);
+            JsonObject o = r.readObject();
+            c.setDataId(o.getString("dataId"));
             c.setFname(o.getString("fname"));
             c.setSname(o.getString("sname"));
             c.setPercentage(o.getString("percentage"));

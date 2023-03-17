@@ -47,17 +47,11 @@ public class CalculatorRepo {
         for (String key : allKeys) {
             String result = template.opsForValue().get(key);
 
-            calcarray.add(Calculator.createUserObject(result));
+            calcarray.add(Calculator.createUserObjectFromRedis(result));
         }
 
         return calcarray;
 
     }
-
-    
-
-
-
-    
 
 }
