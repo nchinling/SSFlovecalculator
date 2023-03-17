@@ -19,8 +19,6 @@ public class Calculator implements Serializable {
 
     //need to implement id
 
-    
-
     public Calculator() {}
 
     public Calculator(String fname, String sname) {
@@ -49,19 +47,19 @@ public class Calculator implements Serializable {
     public void setResult(String result) {this.result = result;}
 
     //convert from JsonObject to Java
-    public static Calculator createJson(JsonObject j){
-        Calculator c = new Calculator();
-        c.percentage = "%s - %s"
-                .formatted(j.getString("percentage"));
-        c.percentage = "%s - %s"
-                .formatted(j.getString("result"));
+    // public static Calculator createFromJson(JsonObject j){
+    //     Calculator c = new Calculator();
+    //     c.percentage = "%s - %s"
+    //             .formatted(j.getString("percentage"));
+    //     c.result = "%s - %s"
+    //             .formatted(j.getString("result"));
 
         // c.icon = "https://openweathermap.org/img/wn/%s@4x.png"
         //     .formatted(j.getString("icon"));
         //c.icon = "https://openweathermap.org/img/wn/" + j.getString("icon")  + "@4x.png";
         
-        return c;
-    }
+    //     return c;
+    // }
 
     // convert json to Java object. 
     public static Calculator create(String json) throws IOException{

@@ -21,10 +21,10 @@ public class AppController {
     private CalculatorService cSvc;
     
     @GetMapping
-    public String getScore(@RequestParam(required=true) String name1,
-    @RequestParam(required=true) String name2, Model model) 
+    public String getScore(@RequestParam(required=true) String fname,
+    @RequestParam(required=true) String sname, Model model) 
     throws IOException{
-    Optional<Calculator> c = cSvc.getResult(name1, name2);
+    Optional<Calculator> c = cSvc.getResult(fname, sname);
     model.addAttribute("calculatorresults", c.get());
     return "calculator";
     }

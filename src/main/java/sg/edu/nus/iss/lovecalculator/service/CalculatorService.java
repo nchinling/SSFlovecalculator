@@ -22,12 +22,14 @@ public class CalculatorService {
     @Value("${workshop.love.calculator.api.key}")
     private String loveCalculatorKey;
 
+    @Value("${workshop.love.calculator.api.host}")
+    private String loveCalculatorHost;
+
     public Optional<Calculator> getResult(String fname, String sname)
         throws IOException{
         System.out.println("loveCalculatorUrl: " + loveCalculatorUrl);
         System.out.println("loveCalculatorKey: " + loveCalculatorKey);
         
-        String url = "https://love-calculator.p.rapidapi.com/getPercentage?fname=Chin&sname=Ling";
         String loveUrl = UriComponentsBuilder
                               .fromUriString(loveCalculatorUrl)
                               .queryParam("fname", 
@@ -38,8 +40,8 @@ public class CalculatorService {
                               
         HttpHeaders headers = new HttpHeaders();
         //need to use env variable. will be penalised if not.
-        headers.set("X-RapidAPI-Key", "7012b59ca2msh3f3a6f36ec7ce3bp1d5f4cjsnf4bdf61c60ed");
-        headers.set("X-RapidAPI-Host", "love-calculator.p.rapidapi.com");
+        headers.set("X-RapidAPI-Key", loveCalculatorKey);
+        headers.set("X-RapidAPI-Host", loveCalculatorHost);
 
         RequestEntity req = RequestEntity.get(loveUrl)
                             .headers(headers)

@@ -14,13 +14,13 @@
 }
 
 table, th, td {
-    border: 1px solid;
+    border: 3px solid;
   }
 
 
   table {
-    width: 100%;
+    /* width: 100%; */
     border-collapse: collapse;
-    border-top-color: rgb(220, 30, 100); 
+    border-color: rgb(220, 30, 100); 
   }
 

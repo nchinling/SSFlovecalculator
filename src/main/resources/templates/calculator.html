@@ -14,29 +14,22 @@
         <h1> Your love score results is out.</h1>
             
         <table>
-            <row>
-                <td>
-                    <p>Your name</p>
-                    <p data-th-text="*{fname}"></p>
-                    <br>
-                </td>
-                <td>
-                    <p>Your lover (or you wish) name</p>
-                    <p data-th-text="*{sname}"></p>
-                    <br>
-                </td>
-                <td>
-                    <p>Percentage</p>
-                    <p data-th-text="*{percentage}"></p>
-                    <br>
-                </td>
-                <td>
-                    <p>Percentage</p>
-                    <p data-th-text="*{result}"></p>
-                    <br>
-                </td>
+            <tr>
+                <td><p>Your name</p></td>
+                <td><p>Your lover (or you wish) name</p></td>
+                
+                <td><p>Percentage</p></td>
+                <td><p>Result</p></td>
+            </tr>
 
-            </row>
+            <tr>
+                <td><p data-th-text="*{fname}"></p></td>
+                <td><p data-th-text="*{sname}"></p></td>
+                <td><p data-th-text="*{percentage}"></p></td>
+                <td><p data-th-text="*{result}"></p></td>
+            </tr>
+
+            
         </table> 
 
 
