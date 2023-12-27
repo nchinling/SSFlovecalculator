@@ -61,6 +61,8 @@ public class CalculatorService {
         headers.set("X-RapidAPI-Key", loveCalculatorKey);
         headers.set("X-RapidAPI-Host", loveCalculatorHost);
 
+        //GET request. GET request doesn't have body. Instead information is sent 
+        //via headers and query params (URI)
         RequestEntity req = RequestEntity.get(loveUrl)
                             .headers(headers)
                             .build();
@@ -73,6 +75,8 @@ public class CalculatorService {
         RestTemplate template= new RestTemplate();
         ResponseEntity<String> r  = template.exchange(req, 
                 String.class);
+
+        //r.getBody() returns a string. a json string in this case. 
         Calculator c = Calculator.createUserObject(r.getBody());
         
         //if not null, save to redisobject.

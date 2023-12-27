@@ -25,7 +25,8 @@ table, th, td {
   }
 
   body {
-    background-image: url('/images/valentine.png');
+    background-image: url('/images/romance3.jpg');
+    background-size: cover;
   }
 
   .bold {

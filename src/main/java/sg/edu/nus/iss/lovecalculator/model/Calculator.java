@@ -121,12 +121,6 @@ public class Calculator implements Serializable {
     }
 
 
-    // this.dataId = generateId(8);
-    // this.fname = fname;
-    // this.sname = sname;
-    // this.percentage = percentage;
-    // this.result = result;
-
     public JsonObject toJSON(){
         return Json.createObjectBuilder()
                 .add("dataId", this.getDataId())
